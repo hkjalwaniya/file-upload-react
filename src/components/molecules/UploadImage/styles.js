@@ -17,6 +17,9 @@ const styles = (theme) => ({
     },
     uploadImageCaption: {
         fontWeight: 'bold'
+    },
+    linkButton: {
+        color: '#1967d2'
     }
   })
   

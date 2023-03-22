@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { connect } from 'react-redux'
 import {
   Button,
   TextField,
@@ -17,10 +18,13 @@ import CloseIcon from '@material-ui/icons/Close';
 import styles from './styles';
 import MyInputField from '../../molecules/MyInputField';
 import Product from '../Product';
+import { userActions } from '../../../actions';
 
 function FileUpload({
+  dispatch,
   isUploadingFile,
   setIsUploadingFile,
+  CADData,
   classes
 }) {
   const [fullName, setFullName] = useState('');
@@ -28,20 +32,22 @@ function FileUpload({
   const[products, setProducts] = useState([
     {
     metal: 'Gold',
-    size: '2mm',
+    size: '',
     dimensions: '',
-    description: 'Gold product'
-  },
-  {
-    metal: 'Silver',
-    size: '5mm',
-    dimensions: '',
-    description: 'Silver product'
+    description: '',
+    image: {}
   }
+
 ]);
 const [expandedAccordion, setExpandedAccordion] = useState(0);
   const handleSubmit = () => {
     setIsUploadingFile(false);
+    const CADData = {
+      fullName,
+      reference,
+      products
+    }
+    dispatch(userActions.uploadCAD(CADData))
   }
   const handleClose = () => {
     setIsUploadingFile(false);
@@ -53,26 +59,27 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
     setReference(e.target.value);
   }
   const handleAddProduct = (e) => {
-    e.preventDefault();
+    if(products.length<=2){
+      const newProduct = {
+        metal: 'Gold',
+        size: '',
+        dimensions: '',
+        description: '',
+        image: {}
+      }
+      setProducts([...products, newProduct])
+    }
   }
   const handleAccordionExpansion = (isExpanded, accordionId) => {
     setExpandedAccordion(isExpanded ? accordionId : 0)
   }
 
-  const handleMetalSelection = (metal) => {
-    console.log('final',metal)
-  }
-  console.log('products*',products)
-
   const handleProductDetailsChange = (index, name, value) => {
-    console.log('before update',products)
     const updatedProducts = [...products];
     updatedProducts[index][name] = value;
-    // products[index] = updatedProducts;
-    console.log('after update',updatedProducts)
-    setProducts(products)
+    setProducts(updatedProducts)
   }
-  
+
   return (
     <div className={classes.fileUpload}>
       <Dialog
@@ -124,7 +131,13 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
                   <InputLabel htmlFor="">Product Details</InputLabel>
                 </Grid>
                 <Grid item>
-                  <Link href="#" onClick={handleAddProduct} underline='always' color="#87CEEB">
+                  <Link
+                    href="#"
+                    onClick={handleAddProduct}
+                    underline='always'
+                    classes={{root: classes.linkButton}}
+                    disabled
+                  >
                     Add Product
                   </Link>
                 </Grid>
@@ -136,8 +149,7 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
                     productId={index+1}
                     expanded={expandedAccordion === index+1}
                     handleAccordionExpansion={handleAccordionExpansion}
-                    // handleMetalSelection={(metal) => handleMetalSelection(metal)}
-                    handleProductDetailsChange={(index, name, value) => handleProductDetailsChange(index, name, value)}
+                    handleProductDetailsChange={(productIndex, name, value) => handleProductDetailsChange(productIndex, name, value)}
                   />
                 </Grid>
               ))}
@@ -157,4 +169,12 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
   );
 }
 
-export default withStyles(styles)(FileUpload);
+const mapStateToProps = (state) => {
+  const { user, error } = state
+  return {
+    CADData: user.CADData,
+    error
+  }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(FileUpload));

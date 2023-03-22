@@ -1,5 +1,4 @@
 const styles = (theme) => {
-    console.log('themes',theme.palette)
     return {
         fileUpload: {
 
@@ -19,6 +18,9 @@ const styles = (theme) => {
             right: theme.spacing(1),
             top: theme.spacing(1),
             color: theme.palette.secondary
+        },
+        linkButton: {
+            color: '#1967d2'
         }
     }
 }

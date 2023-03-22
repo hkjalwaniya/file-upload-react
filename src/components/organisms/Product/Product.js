@@ -11,30 +11,16 @@ import styles from './styles';
 import MyDropDown from "../../atoms/MyDropDown";
 import MyInputField from "../../molecules/MyInputField";
 import UploadImage from "../../molecules/UploadImage/UploadImage";
-import { useEffect } from "react";
 
 function Product({
   productData,
   productId,
   expanded,
   handleAccordionExpansion,
-  // handleMetalSelection,
   handleProductDetailsChange,
   classes
 }) {
-  const { metal, size, dimensions, description } = productData;
-  console.log('productData',productData)
-
-  const handleSizeChange = (e) => {
-
-  }
-  const handleDimensionChange = (e) => {
-
-  }
-  const handleDescriptionChange = (e) => {
-
-  }
-
+  const { metal, size, dimensions, description, image } = productData;
   return (
     <div className={classes.productContainer}>
       <Accordion
@@ -60,7 +46,6 @@ function Product({
             <Grid item md={6} lg={6}>
               <MyDropDown
                 handleSelection={(metal) => {
-                  // handleMetalSelection(metal)
                   handleProductDetailsChange(productId-1, 'metal', metal)
                 }}
                 inputLabel="Metal"
@@ -82,7 +67,7 @@ function Product({
                 placeholder="Type here..."
                 value={size}
                 type="text"
-                handleChange={handleSizeChange}
+                handleChange={(e) => handleProductDetailsChange(productId-1, 'size', e.target.value)}
               />
             </Grid>
             <Grid item md={12} lg={12}>
@@ -93,23 +78,29 @@ function Product({
                 placeholder="Type here..."
                 value={dimensions}
                 type="text"
-                handleChange={handleDimensionChange}
+                handleChange={(e) => handleProductDetailsChange(productId-1, 'dimensions', e.target.value)}
               />
             </Grid>
             <Grid item md={12} lg={12}>
               <MyInputField
                 id="description"
                 label="Description"
-                // labelNote="Optional but highly recommended"
                 placeholder="Type here..."
                 value={description}
                 type="text"
-                handleChange={handleDescriptionChange}
+                handleChange={(e) => {
+                  handleProductDetailsChange(productId-1, 'description', e.target.value)
+                }}
                 multiline={true}
               />
             </Grid>
             <Grid item md={12} lg={12}>
-                <UploadImage />
+                <UploadImage
+                  imageData={image}
+                  productId={productId}
+                  handleImageSelect={(imageProductId, file) => {
+                    handleProductDetailsChange(imageProductId-1, 'image', file)}}
+                />
             </Grid>
           </Grid>
         </AccordionDetails>
