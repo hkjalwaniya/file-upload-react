@@ -20,7 +20,7 @@ function App({ CADData }) {
             <h1>My App</h1>
           </Grid>
           <Grid item md={12} lg={12}>
-            <Button variant="contained" onClick={handleFileUploadClick}>File Upload</Button>
+            <Button variant="contained" onClick={handleFileUploadClick}>CAD Upload</Button>
           </Grid>
           <Grid item md={4} lg={4}></Grid>
           <Grid item md={4} lg={4}>
