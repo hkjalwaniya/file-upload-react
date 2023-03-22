@@ -27,7 +27,7 @@ const styles = (theme) => ({
     },
     accordionDetails: {
         padding: '8px'
-    }
+    },
 })
   
 export default styles

@@ -27,31 +27,32 @@ function App({ CADData }) {
             <div className='cadContainer'>
               <h1>Your CAD Uploads</h1>
               <table>
-                <tr>
-                  <th>Full Name</th>
-                  <th>Reference</th>
-                  <th>Metal</th>
-                  <th>Size</th>
-                  <th>Dimensions</th>
-                  <th>Description</th>
-                  <th>File Name</th>
-                </tr>
-                {
-                  CADData.products ? CADData.products.map((product, index) => (
-                    <tr>
-                      {index === 0 && <>
-                        <td rowSpan={CADData.products.length} className='grey'>{CADData.fullName}</td>
-                        <td rowSpan={CADData.products.length} className='grey'>{CADData.reference}</td></>
-                      }
-                      <td>{product.metal}</td>
-                      <td>{product.size}</td>
-                      <td>{product.dimensions}</td>
-                      <td>{product.description}</td>
-                      <td>{product.image.name}</td>
-                    </tr>
-                  )) : <tr><td colSpan={7}>No data to show</td></tr>
-                }
-
+                <tbody>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Reference</th>
+                    <th>Metal</th>
+                    <th>Size</th>
+                    <th>Dimensions</th>
+                    <th>Description</th>
+                    <th>File Name</th>
+                  </tr>
+                  {
+                    CADData.products ? CADData.products.map((product, index) => (
+                      <tr>
+                        {index === 0 && <>
+                          <td rowSpan={CADData.products.length} className='grey'>{CADData.fullName}</td>
+                          <td rowSpan={CADData.products.length} className='grey'>{CADData.reference}</td></>
+                        }
+                        <td>{product.metal}</td>
+                        <td>{product.size}</td>
+                        <td>{product.dimensions}</td>
+                        <td>{product.description}</td>
+                        <td>{product.image.name}</td>
+                      </tr>
+                    )) : <tr><td colSpan={7}>No data to show</td></tr>
+                  }
+                </tbody>
               </table>
             </div>
           </Grid>
