@@ -59,6 +59,7 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
     setReference(e.target.value);
   }
   const handleAddProduct = (e) => {
+    e.preventDefault();
     if(products.length<=2){
       const newProduct = {
         metal: 'Gold',
