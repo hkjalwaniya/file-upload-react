@@ -31,7 +31,7 @@ function MyDropDown({
           handleSelection(e.target.value)
         }}
         classes={{
-            outlined: classes.outlined
+            outlined: classes.outlined,
         }}
         fullWidth
       >
