@@ -1,16 +1,19 @@
+import { useState } from "react";
 import {
   withStyles,
   Grid,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Typography
+  Typography,
+  Link
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import styles from './styles';
 import MyDropDown from "../../atoms/MyDropDown";
 import MyInputField from "../../molecules/MyInputField";
 import UploadImage from "../../molecules/UploadImage/UploadImage";
+import UploadImageLogo from '../../../images/upload-image-icon.png';
 
 function Product({
   productData,
@@ -29,7 +32,7 @@ function Product({
           expanded: classes.expanded
         }}
         expanded={expanded}
-        onChange={(e, isExpanded) => 
+        onChange={(e, isExpanded) =>
           handleAccordionExpansion(isExpanded, productId)
         }
       >
@@ -43,10 +46,10 @@ function Product({
         </AccordionSummary>
         <AccordionDetails classes={{ root: classes.accordionDetails }}>
           <Grid container spacing={2}>
-            <Grid item md={6} lg={6}>
+            <Grid item md={6} lg={6} classes={{root: classes.gridItemRoot}}>
               <MyDropDown
                 handleSelection={(metal) => {
-                  handleProductDetailsChange(productId-1, 'metal', metal)
+                  handleProductDetailsChange('metal', metal)
                 }}
                 inputLabel="Metal"
                 value={metal}
@@ -60,17 +63,17 @@ function Product({
                 isRequired
               />
             </Grid>
-            <Grid item md={6} lg={6}>
+            <Grid item md={6} lg={6} classes={{root: classes.gridItemRoot}}>
               <MyInputField
                 id="size"
                 label="Size"
                 placeholder="Type here..."
                 value={size}
                 type="text"
-                handleChange={(e) => handleProductDetailsChange(productId-1, 'size', e.target.value)}
+                handleChange={(e) => handleProductDetailsChange('size', e.target.value)}
               />
             </Grid>
-            <Grid item md={12} lg={12}>
+            <Grid item md={12} lg={12} classes={{root: classes.gridItemRoot}}>
               <MyInputField
                 id="dimensions"
                 label="Dimensions"
@@ -78,10 +81,10 @@ function Product({
                 placeholder="Type here..."
                 value={dimensions}
                 type="text"
-                handleChange={(e) => handleProductDetailsChange(productId-1, 'dimensions', e.target.value)}
+                handleChange={(e) => handleProductDetailsChange('dimensions', e.target.value)}
               />
             </Grid>
-            <Grid item md={12} lg={12}>
+            <Grid item md={12} lg={12} classes={{root: classes.gridItemRoot}}>
               <MyInputField
                 id="description"
                 label="Description"
@@ -89,17 +92,17 @@ function Product({
                 value={description}
                 type="text"
                 handleChange={(e) => {
-                  handleProductDetailsChange(productId-1, 'description', e.target.value)
+                  handleProductDetailsChange('description', e.target.value)
                 }}
                 multiline={true}
               />
             </Grid>
             <Grid item md={12} lg={12}>
-                <UploadImage
+              <UploadImage
                   imageData={image}
                   productId={productId}
-                  handleImageSelect={(imageProductId, file) => {
-                    handleProductDetailsChange(imageProductId-1, 'image', file)}}
+                  handleImageSelect={(file) => {
+                    handleProductDetailsChange('image', file)}}
                 />
             </Grid>
           </Grid>

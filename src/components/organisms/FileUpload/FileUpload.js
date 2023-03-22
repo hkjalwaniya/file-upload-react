@@ -75,9 +75,9 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
     setExpandedAccordion(isExpanded ? accordionId : 0)
   }
 
-  const handleProductDetailsChange = (index, name, value) => {
+  const handleProductDetailsChange = (name, value) => {
     const updatedProducts = [...products];
-    updatedProducts[index][name] = value;
+    updatedProducts[expandedAccordion-1][name] = value;
     setProducts(updatedProducts)
   }
 
@@ -110,7 +110,6 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
                 <MyInputField
                   id="full-name"
                   label="Full Name"
-                  labelNote="Optional but highly recommended"
                   placeholder="Your Name..."
                   value={fullName}
                   type="text"
@@ -127,9 +126,9 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
                   handleChange={handleReferenceChange}
                 />
               </Grid>
-              <Grid container justifyContent='space-between'>
+              <Grid container justifyContent='space-between' alignItems='center'>
                 <Grid item >
-                  <InputLabel htmlFor="">Product Details</InputLabel>
+                  <InputLabel htmlFor="" classes={{root: classes.formLabel}}>Product Details</InputLabel>
                 </Grid>
                 <Grid item>
                   <Link
@@ -150,7 +149,7 @@ const [expandedAccordion, setExpandedAccordion] = useState(0);
                     productId={index+1}
                     expanded={expandedAccordion === index+1}
                     handleAccordionExpansion={handleAccordionExpansion}
-                    handleProductDetailsChange={(productIndex, name, value) => handleProductDetailsChange(productIndex, name, value)}
+                    handleProductDetailsChange={(name, value) => handleProductDetailsChange(name, value)}
                   />
                 </Grid>
               ))}

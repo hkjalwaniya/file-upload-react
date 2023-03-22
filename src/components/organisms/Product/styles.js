@@ -25,8 +25,14 @@ const styles = (theme) => ({
     expandMoreIcon: {
         padding: 0
     },
+    heading: {
+        fontWeight: 'bold',
+    },
     accordionDetails: {
         padding: '8px'
+    },
+    gridItemRoot: {
+        padding: '8px 8px 0 8px!important'
     },
 })
   

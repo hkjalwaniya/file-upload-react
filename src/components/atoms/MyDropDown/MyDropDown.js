@@ -18,7 +18,7 @@ function MyDropDown({
 }) {
   return (
     <div className={classes.dropDown}>
-    <InputLabel id={dropDownType} classes={{animated: false}} htmlFor={`select-${dropDownType}`}>{inputLabel}</InputLabel>
+    <InputLabel id={dropDownType} classes={{root: classes.formLabel,animated: false}} htmlFor={`select-${dropDownType}`}>{inputLabel}</InputLabel>
     <FormControl
       variant="outlined"
       className={classes.formControl}

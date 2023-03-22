@@ -39,7 +39,7 @@ function App({ CADData }) {
                   </tr>
                   {
                     CADData.products ? CADData.products.map((product, index) => (
-                      <tr>
+                      <tr key={index}>
                         {index === 0 && <>
                           <td rowSpan={CADData.products.length} className='grey'>{CADData.fullName}</td>
                           <td rowSpan={CADData.products.length} className='grey'>{CADData.reference}</td></>

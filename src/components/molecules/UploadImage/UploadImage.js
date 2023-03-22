@@ -37,7 +37,7 @@ function UploadImage({
                     type="file"
                     accept="image/*"
                     onChange={(e) => {
-                        handleImageSelect(productId, e.target.files[0])
+                        handleImageSelect(e.target.files[0])
                         setMessage('');
                     }}
                 />

@@ -10,6 +10,10 @@ const styles = (theme) => ({
         "& fieldset": { border: 'none' }
         
     },
+    formLabel: {
+        fontWeight: 'bold',
+        color: '#000'
+    },
     outlined: {
         padding: '4px 8px',
     },

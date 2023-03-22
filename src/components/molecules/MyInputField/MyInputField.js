@@ -16,7 +16,7 @@ function MyInputField({
 }) {
   return (
     <div className={classes.inputField}>
-    <InputLabel htmlFor={id}>{label}{labelNote && <span className={classes.labelNote}>{`(${labelNote})`}</span>}</InputLabel>
+    <InputLabel htmlFor={id} classes={{root: classes.formLabel}}>{label}{labelNote && <span className={classes.labelNote}>{`(${labelNote})`}</span>}</InputLabel>
     <MyInput id={id} placeholder={placeholder} type={type} value={value} onChange={handleChange} multiline={multiline} /> 
     </div>
   )
